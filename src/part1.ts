@@ -72,7 +72,7 @@ Implement the `compose` function below:
 const compose =
 	<A, B, C>(f: (b: B) => C, g: (a: A) => B): ((x: A) => C) =>
 	(x: A): C =>
-		IMPLEMENT_THIS
+		f(g(x))
 
 /*
 `compose` is an example of a higher-order function: it takes functions as
@@ -98,7 +98,7 @@ const exclaimNumbers = (xs: readonly number[]): readonly string[] =>
 	myMap(xs, compose(exclaim, toString))
 
 /** Returns whether a number is even. */
-const isEven = (x: number): boolean => IMPLEMENT_THIS
+const isEven = (x: number): boolean => x % 2 === 0
 
 /**
  * Given an array of arrays of numbers, return the arrays that have an even sum.
@@ -107,7 +107,7 @@ const isEven = (x: number): boolean => IMPLEMENT_THIS
  */
 const evenSums = (
 	xs: readonly (readonly number[])[],
-): readonly (readonly number[])[] => IMPLEMENT_THIS
+): readonly (readonly number[])[] => myFilter(xs, arr => isEven(sum(arr)))
 
 // Don't change anything below this line! (needed for the tests to work)
 export {

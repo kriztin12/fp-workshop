@@ -17,7 +17,7 @@ import {IMPLEMENT_THIS} from './utils.js'
 const isDivisibleBy =
 	(d: number) =>
 	(x: number): boolean =>
-		IMPLEMENT_THIS
+		x % d === 0
 
 /** Returns an array of numbers [start, start+1, …, end-1]. */
 const range = (start: number, end: number): readonly number[] =>
