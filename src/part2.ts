@@ -28,7 +28,7 @@ const range = (start: number, end: number): readonly number[] =>
  * For example:
  * - `multiplesOf3Or5UpTo(15)` => `[3, 5, 6, 9, 10, 12]`
  */
-const multiplesOf3Or5UpTo = (n: number): readonly number[] => IMPLEMENT_THIS
+const multiplesOf3Or5UpTo = (n: number): readonly number[] => isDivisibleBy(3)(n) || isDivisibleBy(5)(n) ? [] : []
 
 /**
  * The solution to the Euler Problem 1: the sum of all the multiples of 3 or 5
