@@ -7,24 +7,25 @@ import {IMPLEMENT_THIS} from './utils.js'
 // ***********
 
 /** Multiplies a number by 2. */
-const double = (x: number): number => IMPLEMENT_THIS
+const double = (x: number): number => x * 2
+
 // See if you can reimplement double without using any return statements!
 
 /** Adds 2 numbers. */
 const add =
 	(x: number) =>
-	(y: number): number =>
-		IMPLEMENT_THIS
+	(y: number): number => x + y
 
 const numbers = [3, 6, 6, 2, 5, 8]
 
 /** `numbers` multiplied by 2. */
-const doubledNumbers: readonly number[] = IMPLEMENT_THIS
+const doubledNumbers: readonly number[] = numbers.map(x => double(x))
+
 /** `numbers` with 1 added to them. */
-const add1Numbers: readonly number[] = IMPLEMENT_THIS
+const add1Numbers: readonly number[] = numbers.map(x => add(x)(1))
 
 /** The even `numbers`. */
-const evenNumbers: readonly number[] = IMPLEMENT_THIS
+const evenNumbers: readonly number[] = numbers.filter(x => x % 2 === 0)
 
 // *******
 // reduce
@@ -33,10 +34,13 @@ const evenNumbers: readonly number[] = IMPLEMENT_THIS
 // Use reduce to implement sum and product:
 
 /** Calculates the sum of an array of numbers.  */
-const sum = (xs: readonly number[]): number => IMPLEMENT_THIS
+const sum = (xs: readonly number[]): number => xs.reduce(
+	(accumulator, currentValue) => accumulator + currentValue,
+	0,
+  );
 
 /** Calculates the product of an array of numbers.  */
-const product = (xs: readonly number[]): number => IMPLEMENT_THIS
+const product = (xs: readonly number[]): number => xs.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
 
 // Challenge: Reimplement map and filter using reduce!
 // Try to do this without mutating any arrays. (don't worry about efficiency)
@@ -45,10 +49,10 @@ const product = (xs: readonly number[]): number => IMPLEMENT_THIS
 // (this doesn't mutate `xs` but creates a new array)
 
 const myMap = <T, U>(xs: readonly T[], fn: (x: T) => U): readonly U[] =>
-	IMPLEMENT_THIS
+	xs.reduce((acc: U[], x: T) => [...acc, fn(x)], []);
 
 const myFilter = <T>(xs: readonly T[], fn: (x: T) => boolean): readonly T[] =>
-	IMPLEMENT_THIS
+	xs.reduce((acc: T[], x: T) => (fn(x) ? [...acc, x] : acc), []);
 
 // ********
 // compose
@@ -78,11 +82,11 @@ Let's try using it:
 */
 
 /** Adds an exclamation mark to the end of a string. */
-const exclaim = (string: string): string => IMPLEMENT_THIS
+const exclaim = (string: string): string => string + '!'
 
 /** Converts something to a string. */
 // the `unknown` type means 'anything'
-const toString: (x: unknown) => string = String
+const toString: (x: unknown) => string = x => String(x)
 
 /**
  * Converts an array of numbers into an array of strings with an exclamation
@@ -91,7 +95,7 @@ const toString: (x: unknown) => string = String
  * - `exclaimNumbers([1, 2, 3])` => `['1!', '2!', '3!']`
  */
 const exclaimNumbers = (xs: readonly number[]): readonly string[] =>
-	IMPLEMENT_THIS
+	myMap(xs, compose(exclaim, toString))
 
 /** Returns whether a number is even. */
 const isEven = (x: number): boolean => IMPLEMENT_THIS
